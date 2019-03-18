@@ -12,16 +12,14 @@ pipeline {
                  //sh "echo ${test}"
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
-                 script {
-                    secret='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'''
-                     sh "echo ${secret}"
-                 }
+                 secret='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'''
+                 sh "echo ${secret}"
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                  
-                 sh 'user="$(echo $secret | jq -r .username)"'
-                 sh 'password="$(echo $secret | jq -r .password)"'
-                 echo $user
-                 echo $password
+                 user='''$(echo ${secret} | jq -r .username)'''
+                 password='''$(echo ${secret} | jq -r .password)'''
+                 sh "echo ${user}"
+                 sh "echo ${password}"
                     
                 sh 'test build'
                 echo "successfully tested"
