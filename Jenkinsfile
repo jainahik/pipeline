@@ -1,16 +1,10 @@
 pipeline {
-    agent any
+    agent none
     options { skipDefaultCheckout() }
     stages {    
         stage ('Running on Test Environment'){
             steps{
-                checkout(
-                    [$class: 'GitSCM', branches: [[name: '*/master']], 
-                    doGenerateSubmoduleConfigurations: false, extensions: [], 
-                    submoduleCfg: [], 
-                    userRemoteConfigs: [[url: 'https://github.com/jainahik/new.git']]])
-                    
-        
+                 checkout scm
                  echo "Retriving DB credentials from AWS secret manager"
                  def test = "abhi123"
                  echo $test
