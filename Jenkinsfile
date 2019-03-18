@@ -17,7 +17,7 @@ pipeline {
                  secret="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)"""
                  password="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)"""
                  user="""${secret} | jq -r .username"""
-                 //sh "echo ${user}"
+                 sh "echo ${user}"
                  //sh "echo ${password}"
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                 }
