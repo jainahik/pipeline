@@ -9,8 +9,8 @@ pipeline {
                  echo "Retriving DB credentials from AWS secret manager"
                  //test = "abhi123"
                  //sh "echo ${test}"
-                 sh 'var=$(date)'
-                 sh "echo '$var'"
+                 //sh 'var=$(date)'
+                 //sh "echo '$var'"
                  sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                  sh "echo '$secret'"
                  sh 'user="$(echo $secret | jq -r .username)"'
