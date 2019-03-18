@@ -1,5 +1,6 @@
-def test = ""
-test = "abhi123"
+def test = [:]
+//def test = ""
+//test = "abhi123"
 pipeline {
     agent any
     options { skipDefaultCheckout() }
@@ -8,7 +9,7 @@ pipeline {
             steps{
                  checkout scm
                  echo "Retriving DB credentials from AWS secret manager"
-                 //test = "abhi123"
+                 test = "abhi123"
                  sh "echo ${test}"
                  //secret='$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson) | bash -'
                  //echo $secret
