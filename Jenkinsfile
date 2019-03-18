@@ -1,5 +1,4 @@
 def SECRET_NAME = "mysql-test-secret"
-def user = ""
 pipeline {
     agent any
     options { skipDefaultCheckout() }
@@ -8,12 +7,12 @@ pipeline {
             steps{
                  checkout scm
                  echo "Retriving DB credentials from AWS secret manager"
-                 //test = "abhi123"
-                 //sh "echo ${test}"
+                 sh 'test=abhi123'
+                 sh "echo $test"
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
                 script {
-                    sh "echo ${SECRET_NAME}"
+                 sh "echo ${SECRET_NAME}"
                  username="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"""
                  password="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)"""
                  //user="""\$(echo ${secret} | jq -r .username)"""
