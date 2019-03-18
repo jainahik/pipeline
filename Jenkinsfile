@@ -1,4 +1,5 @@
 def SECRET_NAME = "mysql-test-secret"
+sh "echo ${SECRET_NAME}"
 def user = ""
 pipeline {
     agent any
