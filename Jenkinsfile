@@ -14,7 +14,7 @@ pipeline {
                  //sh "echo '$var'"
                  script {
                     sh 'secret="$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)"'
-                    sh 'echo $secret
+                    sh '''echo $secret'''
                  }
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                  
