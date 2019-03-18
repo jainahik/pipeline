@@ -13,7 +13,7 @@ pipeline {
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
                 script {
-                 user='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id "${SECRET_NAME}" --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)'''
+                 user=''"$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id "${SECRET_NAME}" --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"''
                  password='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)'''
                  sh "echo ${user}"
                  sh "echo ${password}"
