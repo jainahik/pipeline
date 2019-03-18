@@ -10,7 +10,7 @@ pipeline {
                 script {
                  test="abhi123"
                  sh "echo ${test}"
-                 var="\$(date)"
+                 var="$(date)"
                  sh "echo '${var}'"
                 }
                 script {
