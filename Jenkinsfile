@@ -7,8 +7,8 @@ pipeline {
             steps{
                  checkout scm
                  echo "Retriving DB credentials from AWS secret manager"
-                 sh 'test=abhi123'
-                 sh "echo $test"
+                 test="abhi123"
+                 sh "echo ${test}"
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
                 script {
