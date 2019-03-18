@@ -7,10 +7,12 @@ pipeline {
             steps{
                  checkout scm
                  echo "Retriving DB credentials from AWS secret manager"
+                script {
                  test="abhi123"
                  sh "echo ${test}"
-                 //sh 'var=$(date)'
-                 //sh "echo '$var'"
+                 var="\$(date)"
+                 sh "echo '${var}'"
+                }
                 script {
                  sh "echo ${SECRET_NAME}"
                  username="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"""
