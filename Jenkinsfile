@@ -14,11 +14,11 @@ pipeline {
                  //sh "echo '$var'"
                 script {
                     sh "echo ${SECRET_NAME}"
-                 user="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .user)"""
+                 username="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"""
                  password="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)"""
                  //user="""\$(echo ${secret} | jq -r .username)"""
                  //password="""\$(echo ${secret} | jq -r .password)"""
-                 sh "echo ${user}"
+                 sh "echo ${username}"
                  sh "echo ${password}"
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                 }
