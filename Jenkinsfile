@@ -1,4 +1,7 @@
 def secret = ""
+environment {
+   secret="$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)"
+            }
 pipeline {
     agent any
     options { skipDefaultCheckout() }
@@ -11,11 +14,8 @@ pipeline {
                  //sh "echo ${test}"
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
-                 script {
-                     secret = "$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)"
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
-                     echo "${secret}"
-                              }
+                 echo "${secret}"
                  sh 'user="$(echo $secret | jq -r .username)"'
                  sh 'password="$(echo $secret | jq -r .password)"'
                  echo $user
