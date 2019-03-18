@@ -1,5 +1,4 @@
 def SECRET_NAME = "mysql-test-secret"
-sh "echo ${SECRET_NAME}"
 def user = ""
 pipeline {
     agent any
@@ -14,6 +13,7 @@ pipeline {
                  //sh 'var=$(date)'
                  //sh "echo '$var'"
                 script {
+                    sh "echo ${SECRET_NAME}"
                  user='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id "${SECRET_NAME}" --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)'''
                  password='''$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)'''
                  sh "echo ${user}"
