@@ -22,10 +22,9 @@ pipeline {
                  password="""\$(echo ${secret} | jq -r .password)"""
                  sh('#!/bin/sh -e\n' + "echo ${username}")
                  sh('#!/bin/sh -e\n' + "echo ${password}")
-                 //sh "echo ${username}"
-                 //sh "echo ${password}"
-                 //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                 }
+                 sh('#!/bin/sh -e\n' + "sed -i 's/DB_USERNAME/'${user}'/g' cred_replace")
+                 sh('#!/bin/sh -e\n' + "sed -i 's/DB_PASSWORD/'${password}'/g' cred_replace")
                  //sh """user=$(echo ${secret} | jq -r .username)"""
                  //password="$(echo ${secret} | jq -r .password)"
                  //sh "echo ${user}"
