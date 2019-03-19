@@ -15,10 +15,11 @@ pipeline {
                 }
                 script {
                  sh "echo ${SECRET_NAME}"
-                 username="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"""
-                 password="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)"""
-                 //user="""\$(echo ${secret} | jq -r .username)"""
-                 //password="""\$(echo ${secret} | jq -r .password)"""
+                 secret="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)"""
+                 //username="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .username)"""
+                 //password="""\$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id ${SECRET_NAME} --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson | jq -r .password)"""
+                 username="""\$(echo ${secret} | jq -r .username)"""
+                 password="""\$(echo ${secret} | jq -r .password)"""
                  sh('#!/bin/sh -e\n' + "echo ${username}")
                  sh('#!/bin/sh -e\n' + "echo ${password}")
                  //sh "echo ${username}"
