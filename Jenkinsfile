@@ -20,8 +20,9 @@ pipeline {
                  //user="""\$(echo ${secret} | jq -r .username)"""
                  //password="""\$(echo ${secret} | jq -r .password)"""
                  sh('#!/bin/sh -e\n' + "echo ${username}")
+                 sh('#!/bin/sh -e\n' + "echo ${password}")
                  //sh "echo ${username}"
-                 sh "echo ${password}"
+                 //sh "echo ${password}"
                  //sh 'secret=$(/usr/local/bin/aws secretsmanager get-secret-value --secret-id mysql-test-secret --region ap-south-1 --version-stage AWSCURRENT | jq .SecretString | jq fromjson)'
                 }
                  //sh """user=$(echo ${secret} | jq -r .username)"""
